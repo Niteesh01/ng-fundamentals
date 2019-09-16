@@ -12,9 +12,12 @@ import { NavBarComponent } from './nav/navbar.component'
 import { RouterModule } from '@angular/router';
 
 import { Error404Component } from './errors/404.component';
-import { EventRouteActivator } from './events/event-details/event-route-activator.service';
+
 import { AuthService } from './user/auth.service'
 import { FormsModule,ReactiveFormsModule} from '@angular/forms'
+
+import { HttpClientModule } from '@angular/common/http'
+
 
 
 import {
@@ -29,7 +32,8 @@ import {
   UpvoteComponent,
   DurationPipe,
   VoterService,
-  LocationValidator
+  LocationValidator,
+  EventResolver
 
 } from './events/index'
 
@@ -59,9 +63,10 @@ let jQuery = window['$']
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [EventService, EventRouteActivator, EventListResolver, AuthService, VoterService,
+  providers: [EventService, EventListResolver, EventResolver, AuthService, VoterService,
   { provide: TOASTR_TOKEN,
    useValue: toastr },
    { provide: JQ_TOKEN,
